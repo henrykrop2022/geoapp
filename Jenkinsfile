@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'M2_HOME'
+    }
     environment {
         BRANCH_NAME = 'main'
         GITHUB_CREDENTIALS = 'github-credentials'
@@ -13,9 +16,11 @@ pipeline {
                 url: "${GIT_URL}"
             }
         }
-        stage('Test') {
+        stage('unit test') {
             steps {
-                echo 'Testing..'
+                sh 'mvn clean'
+                sh 'mvn test'
+                sh 'mvn compile'
             }
         }
         stage('Deploy') {
