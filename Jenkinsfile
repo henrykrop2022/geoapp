@@ -30,8 +30,7 @@ pipeline {
             steps {
                 withSonarQubeEnv(credentialsId: "${SONARQUBE_CRED}", \
                 installationName: "${SONARQUBE_INSTALLATION}") {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner  -Dsonar.projectName=${APP_NAME} -Dsonar.projectKey=${APP_NAME}\ 
-                    -Dsonar.java.binaries=. '''
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=${APP_NAME} -Dsonar.projectKey=${APP_NAME} -Dsonar.java.binaries=. '''
                 }
             }
         }
