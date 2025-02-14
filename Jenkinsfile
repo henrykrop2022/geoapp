@@ -4,6 +4,7 @@ pipeline {
         maven 'M2_HOME'
     }
     environment {
+        AWS_REGION = 'us-east-1'
         BRANCH_NAME = 'main'
         SCANNER_HOME = tool 'sonar-tool'
         GITHUB_CREDENTIALS = 'github-cred'
@@ -11,6 +12,13 @@ pipeline {
         SONARQUBE_CRED = 'sonar-cred'
         SONARQUBE_INSTALLATION = 'sonar-server'
         APP_NAME = 'geoapp'
+        JFROG_CRED = 'jfrog-cred'
+        ARTIFACTORYPATH = 'target/*.jar'
+        ARTIFACTORY_URL = 'http://ec2-98-84-139-122.compute-1.amazonaws.com:8081/artifactory'
+        REPO = 'geolocation'
+        ARTIFACTORYTARGETPATH = 'release_${BUILD_ID}.jar'
+        DOCKER_REPO = '180294207776.dkr.ecr.us-east-1.amazonaws.com/geolocation'
+        REPO_URL = '180294207776.dkr.ecr.us-east-1.amazonaws.com'
         
 
     }
@@ -57,10 +65,41 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        // stage('docker build') {
-        //     steps {
-        //         sh 'docker build -t geoapp .'
-        //     }
-        // }
+        stage('upload Jar to Jfrog') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: "${JFROG_CRED}", \ 
+                usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'TIFACTORY_PASSWORD')]) {
+                    scritp {
+                        sh """ curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} -T ${ARTIFACTORYPATH} \
+                        ${ARTIFACTORY_URL}/${REPO}/${ARTIFACTORYTARGETPATH} """                    
+                    } 
+                }
+            }
+        }
+        stage('Docker Image Build') {
+            steps {
+                script {
+                    sh "docker build  --no-cache -t ${DOCKER_REPO} ."
+                    sh "docker build --no-cache -t  ${DOCKER_REPO}:${BUILD_ID} ."
+
+                }
+            }
+        }
+        stage('Scan Docker Image') {
+            steps {
+                script {
+                    sh """trivy image --format table -o docker_image_report.html ${DOCKER_REPO}:${BUILD_ID}"""
+                }
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    sh "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${REPO_URL}"
+                    sh " docker push ${DOCKER_REPO}:latest"
+                    sh " docker push ${DOCKER_REPO}:${BUILD_ID}"
+                }
+            }
+        }
     }
 }
