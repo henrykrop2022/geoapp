@@ -48,7 +48,7 @@ pipeline {
         */
         stage('Trivy Scan') {
             steps {
-                sh 'trivy fs --format table -o maven_dependency.html'
+                sh "trivy fs --format table -o maven_dependency.html ."
             }
         }
         
