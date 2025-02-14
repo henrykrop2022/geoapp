@@ -70,7 +70,7 @@ pipeline {
         stage('upload Jar to Jfrog') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${JFROG_CRED}", usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
-                    scritp {
+                    script {
                         sh """ curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} -T ${ARTIFACTORYPATH} \
                         ${ARTIFACTORY_URL}/${REPO}/${ARTIFACTORYTARGETPATH} """                    
                     } 
