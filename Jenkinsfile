@@ -45,18 +45,18 @@ pipeline {
                 
             }
         }
-        */
+        
         stage('Trivy Scan') {
             steps {
                 sh "trivy fs --format table -o maven_dependency.html ."
             }
         }
-        
-        // stage('code packaging') {
-        //     steps {
-        //         sh 'mvn package'
-        //     }
-        // }
+        */
+        stage('code packaging') {
+            steps {
+                sh 'mvn package'
+            }
+        }
         // stage('docker build') {
         //     steps {
         //         sh 'docker build -t geoapp .'
