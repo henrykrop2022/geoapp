@@ -19,8 +19,7 @@ pipeline {
         ARTIFACTORYTARGETPATH = 'release_${BUILD_ID}.jar'
         DOCKER_REPO = '180294207776.dkr.ecr.us-east-1.amazonaws.com/geolocation'
         REPO_URL = '180294207776.dkr.ecr.us-east-1.amazonaws.com'
-        ARTIFACTORY_USER = 'admin'
-        ARTIFACTORY_PASSWORD = 'password'
+       
         
 
     }
