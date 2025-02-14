@@ -5,7 +5,7 @@ pipeline {
     }
     environment {
         BRANCH_NAME = 'main'
-        GITHUB_CREDENTIALS = 'github-credentials'
+        GITHUB_CREDENTIALS = 'github-cred'
         GIT_URL = 'https://github.com/henrykrop2022/geoapp.git'
         // BUILD_NUMBER = '1.0.0'
     }
