@@ -8,13 +8,13 @@ pipeline {
                 sh 'cat /etc/os-release'
             }
          }
-        stage('Test') {
-            agent { docker 'alpine:latest' }  // Use a valid version
-            steps {
-                sh 'pwd'
-                sh 'cat /etc/os-release'
-            }
-        }
+        // stage('Test') {
+        //     agent { docker 'alpine:latest' }  // Use a valid version
+        //     steps {
+        //         sh 'pwd'
+        //         sh 'cat /etc/os-release'
+        //     }
+        // }
     }
 }
 
