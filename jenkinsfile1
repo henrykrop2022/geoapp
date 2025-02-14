@@ -1,21 +1,20 @@
 pipeline {
-    // agent  { label  'master' }
-    agent none
+    agent any  // Ensure an executor is assigned
     stages {
         stage('Build') {
-            agent { docker 'maven:3.3.3' }
+            agent { docker 'maven:3.8.6' }  // Updated version
             steps {
                 sh 'pwd'
                 sh 'cat /etc/os-release'
             }
          }
         stage('Test') {
-             agent { docker 'alpine:3.20.3'} 
-                steps {
-                    sh 'pwd'
-                    sh 'cat /etc/os-release'
-
-                }
-             }
+            agent { docker 'alpine:latest' }  // Use a valid version
+            steps {
+                sh 'pwd'
+                sh 'cat /etc/os-release'
+            }
         }
     }
+}
+
