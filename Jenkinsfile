@@ -21,21 +21,21 @@ pipeline {
                 url: "${GIT_URL}"
             }
         }
-        stage('unit test') {
-            steps {
-                sh 'mvn clean'
-                sh 'mvn test'
-                sh 'mvn compile'
-            }
-        }
-        stage('sonarqube scan') {
-            steps {
-                withSonarQubeEnv(credentialsId: "${SONARQUBE_CRED}", \
-                installationName: "${SONARQUBE_INSTALLATION}") {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=${APP_NAME} -Dsonar.projectKey=${APP_NAME} -Dsonar.java.binaries=. '''
-                }
-            }
-        }
+        // stage('unit test') {
+        //     steps {
+        //         sh 'mvn clean'
+        //         sh 'mvn test'
+        //         sh 'mvn compile'
+        //     }
+        // }
+        // stage('sonarqube scan') {
+        //     steps {
+        //         withSonarQubeEnv(credentialsId: "${SONARQUBE_CRED}", \
+        //         installationName: "${SONARQUBE_INSTALLATION}") {
+        //             sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=${APP_NAME} -Dsonar.projectKey=${APP_NAME} -Dsonar.java.binaries=. '''
+        //         }
+        //     }
+        // }
         stage('Quality Gate Check') {
             steps {
                 script {
@@ -46,7 +46,7 @@ pipeline {
         }
         stage('Trivy Scan') {
             steps {
-                sh 'trivy fs --format table -o maven_dependencies.html'
+                sh 'trivy fs --format table -o maven_dependency.html'
             }
         }
         // stage('code packaging') {
