@@ -21,13 +21,13 @@ pipeline {
                 url: "${GIT_URL}"
             }
         }
-        // stage('unit test') {
-        //     steps {
-        //         sh 'mvn clean'
-        //         sh 'mvn test'
-        //         sh 'mvn compile'
-        //     }
-        // }
+        stage('unit test') {
+            steps {
+                sh 'mvn clean'
+                sh 'mvn test'
+                sh 'mvn compile'
+            }
+        }
         // stage('sonarqube scan') {
         //     steps {
         //         withSonarQubeEnv(credentialsId: "${SONARQUBE_CRED}", \
