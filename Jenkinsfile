@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'qaserver' }
     tools {
         maven 'M2_HOME'
     }
