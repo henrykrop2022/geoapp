@@ -11,6 +11,7 @@ pipeline {
         SONARQUBE_CRED = 'sonar-cred'
         SONARQUBE_INSTALLATION = 'sonar-server'
         APP_NAME = 'geoapp'
+        
 
     }
     stages {
