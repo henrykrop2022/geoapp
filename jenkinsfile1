@@ -1,20 +1,20 @@
-pipeline {
-    agent any  // Ensure an executor is assigned
-    stages {
-        stage('Build') {
-            agent { docker 'maven:3.8.6' }  // Updated version
-            steps {
-                sh 'pwd'
-                sh 'cat /etc/os-release'
-            }
-         }
-        // stage('Test') {
-        //     agent { docker 'alpine:latest' }  // Use a valid version
-        //     steps {
-        //         sh 'pwd'
-        //         sh 'cat /etc/os-release'
-        //     }
-        // }
-    }
-}
+// pipeline {
+//     agent any  // Ensure an executor is assigned
+//     stages {
+//         stage('Build') {
+//             agent { docker 'maven:3.8.6' }  // Updated version
+//             steps {
+//                 sh 'pwd'
+//                 sh 'cat /etc/os-release'
+//             }
+//          }
+//         // stage('Test') {
+//         //     agent { docker 'alpine:latest' }  // Use a valid version
+//         //     steps {
+//         //         sh 'pwd'
+//         //         sh 'cat /etc/os-release'
+//         //     }
+//         // }
+//     }
+// }
 

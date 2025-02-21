@@ -1,15 +1,15 @@
-pipeline {
-    agent { label 'qaserver' }
+// pipeline {
+//     agent { label 'qaserver' }
 
-  stages {
-    stage('Build') {
-        steps {
-            sh 'pwd'
-            sh 'cat /etc/os-release'
-            sh 'touch agent-jenkins'
-        }
-    }
-  }
-}
+//   stages {
+//     stage('Build') {
+//         steps {
+//             sh 'pwd'
+//             sh 'cat /etc/os-release'
+//             sh 'touch agent-jenkins'
+//         }
+//     }
+//   }
+// }
    
   
