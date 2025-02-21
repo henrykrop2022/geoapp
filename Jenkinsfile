@@ -59,11 +59,11 @@ pipeline {
                 sh "trivy fs --format table -o maven_dependency.html ."
             }
         }
-//         stage('code packaging') {
-//             steps {
-//                 sh 'mvn package'
-//             }
-//         }
+        stage('code packaging') {
+            steps {
+                sh 'mvn package'
+            }
+        }
 //         stage('upload Jar to Jfrog') {
 //             steps {
 //                 withCredentials([usernamePassword(credentialsId: "${JFROG_CRED}", usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
