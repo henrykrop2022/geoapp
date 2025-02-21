@@ -54,11 +54,11 @@ pipeline {
 //             }
 //         }
         
-//         stage('Trivy Scan') {
-//             steps {
-//                 sh "trivy fs --format table -o maven_dependency.html ."
-//             }
-//         }
+        stage('Trivy Scan') {
+            steps {
+                sh "trivy fs --format table -o maven_dependency.html ."
+            }
+        }
 //         stage('code packaging') {
 //             steps {
 //                 sh 'mvn package'
