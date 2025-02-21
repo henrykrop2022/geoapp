@@ -83,13 +83,13 @@ pipeline {
                 }
             }
         }
-//         stage('Scan Docker Image') {
-//             steps {
-//                 script {
-//                     sh """trivy image --format table -o docker_image_report.html ${DOCKER_REPO}:${BUILD_ID}"""
-//                 }
-//             }
-//         }
+        stage('Scan Docker Image') {
+            steps {
+                script {
+                    sh """trivy image --format table -o docker_image_report.html ${DOCKER_REPO}:${BUILD_ID}"""
+                }
+            }
+        }
 //         stage('Push Docker Image') {
 //             steps {
 //                 script {
