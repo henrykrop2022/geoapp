@@ -64,16 +64,16 @@ pipeline {
                 sh 'mvn package'
             }
         }
-//         stage('upload Jar to Jfrog') {
-//             steps {
-//                 withCredentials([usernamePassword(credentialsId: "${JFROG_CRED}", usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
-//                     script {
-//                         sh """ curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} -T ${ARTIFACTORYPATH} \
-//                         ${ARTIFACTORY_URL}/${REPO}/${ARTIFACTORYTARGETPATH} """                    
-//                     } 
-//                 }
-//             }
-//         }
+        stage('upload Jar to Jfrog') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: "${JFROG_CRED}", usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
+                    script {
+                        sh """ curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} -T ${ARTIFACTORYPATH} \
+                        ${ARTIFACTORY_URL}/${REPO}/${ARTIFACTORYTARGETPATH} """                    
+                    } 
+                }
+            }
+        }
 //         stage('Docker Image Build') {
 //             steps {
 //                 script {
