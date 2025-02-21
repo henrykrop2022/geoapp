@@ -90,14 +90,14 @@ pipeline {
                 }
             }
         }
-//         stage('Push Docker Image') {
-//             steps {
-//                 script {
-//                     sh "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${REPO_URL}"
-//                     sh " docker push ${DOCKER_REPO}:latest"
-//                     sh " docker push ${DOCKER_REPO}:${BUILD_ID}"
-//                 }
-//             }
-//         }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    sh "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${REPO_URL}"
+                    sh " docker push ${DOCKER_REPO}:latest"
+                    sh " docker push ${DOCKER_REPO}:${BUILD_ID}"
+                }
+            }
+        }
      }
 }
