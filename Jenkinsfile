@@ -74,15 +74,15 @@ pipeline {
                 }
             }
         }
-//         stage('Docker Image Build') {
-//             steps {
-//                 script {
-//                     sh "docker build  --no-cache -t ${DOCKER_REPO} ."
-//                     sh "docker build --no-cache -t  ${DOCKER_REPO}:${BUILD_ID} ."
+        stage('Docker Image Build') {
+            steps {
+                script {
+                    sh "docker build  --no-cache -t ${DOCKER_REPO} ."
+                    sh "docker build --no-cache -t  ${DOCKER_REPO}:${BUILD_ID} ."
 
-//                 }
-//             }
-//         }
+                }
+            }
+        }
 //         stage('Scan Docker Image') {
 //             steps {
 //                 script {
